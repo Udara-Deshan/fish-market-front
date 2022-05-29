@@ -1,0 +1,17 @@
+<div *ngFor="let menu of Menus; let i=index" style="width: 100%">
+  <div *ngIf="!isMultiLevel(menu)" style="width: 100%">
+    <button mat-menu-item [routerLink]="menu.url" >
+      <mat-icon class="nav-btn-icon" *ngIf="menu.icon">{{menu?.icon}}</mat-icon>
+      {{menu.menuName}}</button>
+  </div>
+  <div *ngIf="isMultiLevel(menu)"  >
+    <button [matMenuTriggerFor]="men" mat-menu-item >
+      <mat-icon class="nav-btn-icon" *ngIf="menu.icon">{{menu?.icon}}</mat-icon>
+      {{menu.menuName}}</button>
+    <mat-menu #men="matMenu" xPosition="after" style="margin-left: 100px">
+      <app-menu-container [Menus]="menu.list"></app-menu-container>
+    </mat-menu>
+  </div>
+</div>
+
+

@@ -1,0 +1,71 @@
+export const NavData=[
+  {
+    menuName: 'Customer',
+    url: '',
+    icon: 'person',
+    list: [
+      {
+        menuName: 'Add Customer',
+        url: 'customer/add',
+        icon: '',
+        list: []
+      },
+      {
+        menuName: 'All Customers',
+        url: 'customer/all',
+        icon: '',
+        list: []
+      }
+    ]
+  },
+  {
+    menuName: 'Cooling Rooms',
+    url: '',
+    icon: 'backup_table',
+    list: [
+      {
+        menuName: 'Add Cooling Room',
+        url: 'cooling-room/add',
+        icon: '',
+        list: []
+      },
+      {
+        menuName: 'All Cooling Rooms',
+        url: 'cooling-room/all',
+        icon: '',
+        list: []
+      },
+      {
+        menuName: 'Add Cooling Room Type',
+        url: 'cooling-room/type/add',
+        icon: '',
+        list: []
+      },
+      {
+        menuName: 'All Cooling Room Types',
+        url: 'cooling-room/type/all',
+        icon: '',
+        list: []
+      }
+    ]
+  },
+  {
+    menuName: 'Stock',
+    url: '',
+    icon: 'inventory_2',
+    list: [
+      {
+        menuName: 'Create Stock',
+        url: 'stock/create',
+        icon: '',
+        list: []
+      },
+      {
+        menuName: 'All Stocks',
+        url: 'stock/all',
+        icon: '',
+        list: []
+      }
+    ]
+  }
+];

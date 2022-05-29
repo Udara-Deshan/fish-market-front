@@ -1,0 +1,14 @@
+@import "src/assets/styles/common-mixins";
+
+.company-pic{
+  @include flexed-position(center);
+  //height: 100%;
+  max-height: 50px;
+  max-width: 100px;
+}
+.company-name{
+
+}
+.flexed{
+  display: flex;
+}

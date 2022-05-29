@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="top-bar">
+  <div class="left">
+    <app-client></app-client>
+    <button mat-button class="menu-button" (click)="sendNavState()" disableRipple>
+      <mat-icon>{{ isMenuOpen ? 'menu_open' : 'menu' }}</mat-icon>
+    </button>
+  </div>
+  <div >
+  </div>
+  <div [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+    <span>{{user}}</span>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Log Out</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

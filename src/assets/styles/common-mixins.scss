@@ -1,0 +1,65 @@
+@mixin squareCover($size){
+  width: $size;
+  height: $size;
+}
+@mixin flexed-position($position){
+  display: flex;
+  align-items: $position;
+  justify-content: $position;
+}
+@mixin flexed-space($position){
+  display: flex;
+  align-items: center;
+  justify-content: $position;
+}
+@mixin setButton($type){
+  @if $type == btn-primery {
+    //background-color: ;
+  } @else if $type == btn-danger {
+  } @else {
+    @error "Unknown Button Type #{$type}.";
+  }
+}
+@mixin setHeader($type){
+  border-radius: 7px;
+  padding: 10px 10px;
+  @include flexed-space(space-between);
+  text-align: center;
+  span{
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  @if $type == create {
+    background-color: darkgrey;
+    color: #1f201f;
+  } @else if $type == update {
+  } @else {
+    @error "Unknown Header Type #{$type}.";
+  }
+}
+@mixin setButtonBar($position){
+  display: flex;
+  width: 100%;
+  @if $position == right{
+    @include flexed-space(flex-end);
+    button{
+      margin: 0 5px;
+    }
+    #primary{
+
+    }
+    #danger{
+
+    }
+  }
+}
+@mixin setForm($type){
+  padding: 10px;
+  div{
+    width: 100%;
+    @include flexed-space(space-around);
+    mat-form-field{
+      width: 45%;
+    }
+  }
+}

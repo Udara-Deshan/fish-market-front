@@ -1,1 +1,156 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+
+
+
+
+
+
+
+#main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //min-height: 100%;
+  overflow: hidden;
+  height: auto;
+  padding: 10px;
+  //background-color: rgba(231, 228, 228, 0.29);
+}
+
+
+#header {
+  //height: 70px;
+  display: flex;
+  background-color: #eaeaea;
+  padding: 10px;
+  border-radius: 5px;
+
+}
+
+.header-content {
+  display: flex;
+  width: 100%;
+
+  #header-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #575757;
+    padding-right: 10px;
+  }
+
+  #header-filters {
+    display: flex;
+    //background-color: white;
+    //border-radius: 5px;
+
+    div{
+      color: #575757;
+      margin-left: 5px;
+      background-color: white;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-around;
+      padding: 5px 8px;
+      align-items: center;
+    }
+    #search{
+      align-items: center;
+      text-align: center;
+      label{
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+      }
+      input{
+        background-color: transparent;
+        border: 0;
+        width: 75%;
+        height: 100%;
+        justify-content: space-around;
+      }
+      input:focus{
+        outline: none;
+      }
+    }
+    .filters{
+      span{
+        width: 60px;
+      }
+      mat-select{
+        width: 75px;
+      }
+
+    }
+
+  }
+}
+
+#body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: white;
+  width: 98%;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  //background-color: rgba(231, 228, 228, 0.29);
+}
+#buttons {
+  width: 70px;
+  //padding-right:15px;
+  display: flex;
+  justify-content: space-between;
+  button{
+    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    align-items: center;
+    //text-align: center;
+    display: flex;
+    justify-content: center;
+    mat-icon{
+      font-size: 20px;
+      margin: auto!important;
+    }
+  }
+}
+form{
+  padding: 10px;
+}
+
+.form-row{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  mat-form-field{
+    width: 45%;
+  }
+
+}
+.tbl-top-func{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50%; display: flex;
+  justify-content: space-around;
+}
+.form-btn-row{
+  display: flex;
+  justify-content: flex-end;
+  button{
+    margin: 0 5px;
+  }
+}
+

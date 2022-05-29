@@ -1,0 +1,40 @@
+<div id="main">
+  <div id="body">
+    <div id="header">
+      <div class="header-content">
+        <div id="header-title">
+          <span style="margin-right: 10px">{{formMode.slice(0, 1)+formMode.slice(1).toLowerCase()}} Cooling Room</span>
+        </div>
+        <div>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div>
+      <!--      <app-progress-spinner #component [mode]="'TABLE'"></app-progress-spinner>-->
+      <form  [formGroup]="coolingRoomTypeDetailsForm">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Type Name</mat-label>
+            <input formControlName="typeName" matInput placeholder="Type Hear...">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Type Price</mat-label>
+            <input formControlName="typePrice" matInput placeholder="Type Hear...">
+          </mat-form-field>
+        </div>
+
+      </form>
+      <div class="form-btn-row">
+        <button (click)="clear()" *ngIf="formMode==='CREATE'" color="warn" mat-raised-button type="reset">Clear</button>
+        <button (click)="Cancel()" color="warn" *ngIf="formMode==='UPDATE'" mat-raised-button type="reset">Cancel</button>
+        <button (click)="onAction()" *ngIf="!apiResponse && formMode==='CREATE'" color="primary" mat-raised-button type="submit">Create</button>
+        <button (click)="onAction()" *ngIf="!apiResponse && formMode==='UPDATE'" color="primary"  mat-raised-button type="submit">Update</button>
+        <button *ngIf="apiResponse" color="primary" mat-button>
+          <mat-spinner diameter="20"></mat-spinner>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

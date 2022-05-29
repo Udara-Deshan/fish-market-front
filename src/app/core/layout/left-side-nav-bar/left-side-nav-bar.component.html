@@ -1,0 +1,10 @@
+<div class="dashboard" >
+  <mat-sidenav-container class="left-side-nav" >
+    <mat-sidenav mode="side" [opened]="navState" >
+      <app-menu-container [Menus]="currentMenus"></app-menu-container>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet ></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

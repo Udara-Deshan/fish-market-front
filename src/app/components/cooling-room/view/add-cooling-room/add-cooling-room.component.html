@@ -1,0 +1,53 @@
+<div id="main">
+  <div id="body">
+    <div id="header">
+      <div class="header-content">
+        <div id="header-title">
+          <span style="margin-right: 10px">{{formMode.slice(0, 1)+formMode.slice(1).toLowerCase()}} Cooling Room</span>
+        </div>
+        <div>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div>
+      <!--      <app-progress-spinner #component [mode]="'TABLE'"></app-progress-spinner>-->
+      <form  [formGroup]="coolingRoomDetailsForm">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Room Number</mat-label>
+            <input formControlName="roomNumber" matInput placeholder="Type Hear...">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Room Type</mat-label>
+            <mat-select formControlName="roomTypeId" >
+              <mat-option *ngFor="let option of filteredCoolingRoomTypes" [value]="option.typeName"
+                          (click)="selectedCoolingRoomType=option">
+                <div style="width: 100%;display: flex;justify-content: space-between">
+                  <span>
+                      {{option.typeName}}
+                    </span>
+                  <span>Rs:{{option.typePrice}}</span>
+                </div>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        </div>
+
+      </form>
+      <div class="form-btn-row">
+        <button (click)="clear()" *ngIf="formMode==='CREATE'" color="warn" mat-raised-button type="reset">Clear</button>
+        <button (click)="Cancel()" color="warn" *ngIf="formMode==='UPDATE'" mat-raised-button type="reset">Cancel</button>
+        <button (click)="onAction()" *ngIf="!apiResponse && formMode==='CREATE'" color="primary" mat-raised-button type="submit">Create</button>
+        <button (click)="onAction()" *ngIf="!apiResponse && formMode==='UPDATE'" color="primary"  mat-raised-button type="submit">Update</button>
+        <button *ngIf="apiResponse" color="primary" mat-button>
+          <mat-spinner diameter="20"></mat-spinner>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

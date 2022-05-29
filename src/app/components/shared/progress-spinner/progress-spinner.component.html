@@ -1,0 +1,4 @@
+<div *ngIf="progressSpinnerService.isVisible()" >
+  <mat-progress-bar *ngIf="mode==='TABLE'" mode="indeterminate"></mat-progress-bar>
+  <mat-spinner *ngIf="mode==='FORM'"></mat-spinner>
+</div>

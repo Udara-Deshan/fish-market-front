@@ -1,0 +1,26 @@
+@import "common-mixins";
+
+
+.main-full{
+  @apply fully-covered;
+  width: 100%;
+  height: 100%;
+}
+.fully-covered{
+  @include squareCover(100%);
+}
+.form-with-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  padding: 10px;
+  div:nth-child(1){
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+  }
+}

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AuthenticationService} from "./core/auth/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'FishMarket';
+  title = 'SBM-Front-End';
+  constructor(private authenticationService:AuthenticationService,
+              private router:Router) {
+  if (this.authenticationService.isLodged()){}
+  this.router.navigateByUrl('home');
+  }
 }

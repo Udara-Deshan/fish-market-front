@@ -1,0 +1,24 @@
+<div class="main-full center-content">
+    <div  [formGroup]="loginDetailsForm" (ngSubmit)="loginUser()" class="form">
+      <h1>Login</h1>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input formControlName="userName" matInput placeholder="Example@mail">
+        <mat-icon matSuffix>mail_outline</mat-icon>
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" type="password" matInput placeholder="XXXXXXXX">
+      <mat-icon matSuffix>key</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+      <div class="buttons">
+        <button (click)="clear()" mat-raised-button>Cancel</button>
+        <button  *ngIf="!apiResponse" (click)="loginUser()" mat-raised-button color="primary" type="submit">LogIn</button>
+        <button *ngIf="apiResponse" color="primary" mat-button>
+          <mat-spinner diameter="20"></mat-spinner>
+        </button>
+      </div>
+    </div>
+</div>

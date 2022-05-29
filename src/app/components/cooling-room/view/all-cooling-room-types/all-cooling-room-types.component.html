@@ -1,0 +1,55 @@
+<div id="main">
+  <div id="body">
+    <div id="header">
+      <div class="header-content">
+        <div id="header-title">
+          <span style="margin-right: 10px">All Cooling Rooms</span>
+        </div>
+        <div>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <table [dataSource]="dataSource" mat-table>
+          <ng-container matColumnDef="action">
+            <th *matHeaderCellDef mat-header-cell> Action</th>
+            <td *matCellDef="let row" mat-cell>
+              <div id="buttons">
+                <mat-icon  (click)="update(row)">edit</mat-icon>
+                <mat-icon (click)="delete(row)">delete</mat-icon>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell> ID</th>
+            <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="typeName">
+            <th *matHeaderCellDef mat-header-cell>Type Name</th>
+            <td *matCellDef="let element" mat-cell> {{element.typeName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="typePrice">
+            <th *matHeaderCellDef mat-header-cell>Type Price</th>
+            <td *matCellDef="let element" mat-cell> {{element.typePrice}} </td>
+          </ng-container>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [colSpan]="displayedColumns.length"><app-progress-spinner [mode]="'TABLE'"></app-progress-spinner></td>
+          </tr>
+
+          <tr *matHeaderRowDef="displayedColumns" id="table" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+
+
+      </div>
+    </div>
+    <mat-paginator (page)="tempPageEvent=getServerData($event)" [pageSizeOptions]="pageSizeOptions"
+                   showFirstLastButtons></mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+<div id="main">
+  <div id="body">
+    <div id="header">
+      <div class="header-content">
+        <div id="header-title">
+          <span style="margin-right: 10px">{{formMode.slice(0, 1) + formMode.slice(1).toLowerCase()}} Customer</span>
+        </div>
+        <div>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div>
+
+      <form [formGroup]="stockDetailsForm">
+
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Customer</mat-label>
+            <input [matAutocomplete]="autocustomer"
+                   (keyup)="getCustomers()"
+                   aria-label=""
+                   formControlName="customer"
+                   matInput
+                   placeholder=""
+                   type="text">
+            <mat-autocomplete #autocustomer="matAutocomplete">
+              <mat-option *ngFor="let option of filteredCustomers" [value]="option.shopOwnerName"
+                          (click)="selectedCustomer=option"
+              >
+                <div style="width: 100%;display: flex;justify-content: space-between">
+                  <span>{{option.id}}</span>
+                  |
+                  <span>
+                      {{option.shopName}}
+                    </span>
+                  |
+                  <span>
+                      {{option.shopOwnerName}}
+                    </span>
+                </div>
+
+
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Who Issued</mat-label>
+            <input formControlName="whoIssued" type="number" matInput>
+          </mat-form-field>
+
+        </div>
+
+
+      </form>
+
+      <div>
+        <div style="padding-left: 10px;"><span style="background-color: white;padding: 0 5px">Enter Description</span>
+        </div>
+        <form style="margin-top: -10px;border: 2px solid gray;border-radius: 5px;padding: 10px;padding-top: 20px"
+              [formGroup]="stockDescDetailsForm"
+              (ngSubmit)="addToList()">
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Room Type</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let option of filteredCoolingRoomTypes" [value]="option.typeName"
+                            (click)="selectedCoolingRoomType=option">
+                  <div style="width: 100%;display: flex;justify-content: space-between">
+                  <span>
+                      {{option.typeName}}
+                    </span>
+                    -
+                    <span>{{option.typePrice}}</span>
+                  </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Room</mat-label>
+              <mat-select formControlName="coolingRoom">
+                <mat-option *ngFor="let option of filteredCoolingRooms" [value]="option.roomNumber"
+                            (click)="selectedCoolingRoom=option">
+                  <div style="width: 100%;display: flex;justify-content: space-between">
+                  <span>
+                      {{option.roomNumber}}
+                    </span>
+                    -
+                    <span>{{option.roomTypeId}}</span>
+                  </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Fish Name</mat-label>
+              <input formControlName="fishName" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Fish Weight</mat-label>
+              <input formControlName="fishWeight" type="number" matInput>
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+
+          </div>
+          <div class="form-btn-row">
+            <button color="primary" mat-raised-button type="submit">Add</button>
+          </div>
+        </form>
+      </div>
+      <div class="form-row"></div>
+      <table [dataSource]="dataSource" mat-table>
+        <ng-container matColumnDef="action">
+          <th *matHeaderCellDef mat-header-cell> Action</th>
+          <td *matCellDef="let row" mat-cell>
+            <div id="buttons">
+              <mat-icon (click)="removeDesc(row)">remove</mat-icon>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="{{x}}" *ngFor="let x of fakeList">
+          <th *matHeaderCellDef mat-header-cell> {{x}}</th>
+          <td *matCellDef="let row" mat-cell> {{row[x]}}</td>
+        </ng-container>
+
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" [colSpan]="displayedColumns.length">
+            <span style="width: 100%;display:flex;justify-content: center">No Data</span>
+          </td>
+        </tr>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+
+
+      <div class="form-btn-row " style="padding-top: 20px">
+        <button (click)="clear()" *ngIf="formMode==='CREATE'" color="warn" mat-raised-button type="reset">Clear</button>
+        <button (click)="Cancel()" color="warn" *ngIf="formMode==='UPDATE'" mat-raised-button type="reset">Cancel
+        </button>
+        <button (click)="onAction()" *ngIf="!apiResponse && formMode==='CREATE'" color="primary" mat-raised-button
+                type="submit">Create
+        </button>
+        <button (click)="onAction()" *ngIf="!apiResponse && formMode==='UPDATE'" color="primary" mat-raised-button
+                type="submit">Update
+        </button>
+        <button *ngIf="apiResponse" color="primary" mat-button>
+          <mat-spinner diameter="20"></mat-spinner>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

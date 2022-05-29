@@ -1,0 +1,18 @@
+.form-header-filters {
+  color:black;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  span {
+    width: 60px;
+  }
+
+  .mat-select {
+    width: 90px;
+  }
+
+  .mat-select-value, .mat-select-panel {
+    color:black;
+    background-color: white;
+  }
+}
