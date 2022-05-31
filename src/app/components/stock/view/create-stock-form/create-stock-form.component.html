@@ -47,7 +47,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Who Issued</mat-label>
-            <input formControlName="whoIssued" type="number" matInput>
+            <input formControlName="whoIssued"  matInput>
           </mat-form-field>
 
         </div>
@@ -65,15 +65,15 @@
           <div class="form-row">
             <mat-form-field appearance="outline">
               <mat-label>Room Type</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let option of filteredCoolingRoomTypes" [value]="option.typeName"
-                            (click)="selectedCoolingRoomType=option">
+              <mat-select formControlName="coolingRoomType">
+                <mat-option *ngFor="let option of filteredCoolingRoomTypes" [value]="option?.typeName"
+                            (click)="selectCoolingRoomType(option)">
                   <div style="width: 100%;display: flex;justify-content: space-between">
                   <span>
-                      {{option.typeName}}
+                      {{option?.typeName}}
                     </span>
                     -
-                    <span>{{option.typePrice}}</span>
+                    <span>{{option?.typePrice}}</span>
                   </div>
                 </mat-option>
               </mat-select>
@@ -81,14 +81,14 @@
             <mat-form-field appearance="outline">
               <mat-label>Room</mat-label>
               <mat-select formControlName="coolingRoom">
-                <mat-option *ngFor="let option of filteredCoolingRooms" [value]="option.roomNumber"
+                <mat-option *ngFor="let option of filteredCoolingRooms" [value]="option?.roomNumber"
                             (click)="selectedCoolingRoom=option">
                   <div style="width: 100%;display: flex;justify-content: space-between">
                   <span>
-                      {{option.roomNumber}}
+                      {{option?.roomNumber}}
                     </span>
                     -
-                    <span>{{option.roomTypeId}}</span>
+                    <span>{{option?.roomTypeId}}</span>
                   </div>
                 </mat-option>
               </mat-select>
@@ -113,7 +113,7 @@
         </form>
       </div>
       <div class="form-row"></div>
-      <table [dataSource]="dataSource" mat-table>
+      <table [dataSource]="dataSource" mat-table >
         <ng-container matColumnDef="action">
           <th *matHeaderCellDef mat-header-cell> Action</th>
           <td *matCellDef="let row" mat-cell>

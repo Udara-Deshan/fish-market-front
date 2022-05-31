@@ -16,6 +16,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import {SharedModule} from "../shared/shared.module";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {SharedModule} from "../shared/shared.module";
     MatInputModule,
     MatTableModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    MatPaginatorModule
   ],
   providers:[DatePipe]
 })

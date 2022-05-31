@@ -11,6 +11,8 @@ import {DatePipe} from "@angular/common";
 import {CoolingRoomService} from "../../../../core/common/service/cooling-room.service";
 import {Observable} from "rxjs";
 import {CoolingRoomTypeDTO} from "../../../../core/common/dto/CoolingRoomTypeDTO";
+import {CoolingRoomTypeService} from "../../../../core/common/service/cooling-room-type.service";
+import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-create-stock-form',
@@ -27,9 +29,9 @@ export class CreateStockFormComponent implements OnInit {
   filteredCustomers!: CustomerDTO[];
   selectedCustomer!: CustomerDTO;
   filteredCoolingRoomTypes!: CoolingRoomTypeDTO[];
-  selectedCoolingRoomType!: CoolingRoomTypeDTO;
+  selectedCoolingRoomType!: CoolingRoomTypeDTO |null;
   filteredCoolingRooms!: CoolingRoomDTO[];
-  selectedCoolingRoom!: CoolingRoomDTO;
+  selectedCoolingRoom!: CoolingRoomDTO |null;
   selectedDescriptionDTOS: DescriptionDTO[] = [];
   dataSource: MatTableDataSource<DescriptionDTO>;
   displayedColumns: string[] = ['action', 'id', 'fishName', 'fishWeight', 'coolingRoomId', 'tokenId', 'price'];
@@ -40,24 +42,31 @@ export class CreateStockFormComponent implements OnInit {
               private stockService: StockService,
               private customerService: CustomerService,
               private coolingRoomService: CoolingRoomService,
+              private coolingRoomTypeService: CoolingRoomTypeService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private pipe: DatePipe
   ) {
     this.dataSource = new MatTableDataSource(this.selectedDescriptionDTOS);
 
+    let t1=['3','341'];
+    let t2=['145','224','3354','3','348','3452','341'];
+    console.log(t2.filter(el=>!t1.includes(el)));
+    console.log('ff')
+
+
   }
 
   ngOnInit(): void {
-    this.getCoolingRoms()
     this.stockDetailsForm = this.formBuilder.group({
       customer: ['', Validators.required],
       whoIssued: ['', Validators.required],
     });
     this.stockDescDetailsForm = this.formBuilder.group({
+      coolingRoomType: ['', Validators.required],
       fishName: ['', Validators.required],
       fishWeight: ['', Validators.required],
-      coolingRoom: [{value:'',disable:true}, Validators.required],
+      coolingRoom: [{value: "", disabled: true}, Validators.required],
     });
     this.activatedRoute.params.subscribe(async params => {
       if (params.hasOwnProperty('id')) {
@@ -70,15 +79,21 @@ export class CreateStockFormComponent implements OnInit {
         // this.stockDetailsForm.get('contactNo')?.setValue(this.currentStock.contactNo);
       }
     });
+    this.getCoolingRoomTypes();
   }
 
-  selectRoomType(){
-
+  getCoolingRoomTypes(){
+    this.coolingRoomTypeService.getAll(0, 10).subscribe(res => {
+      console.log(res)
+      if (res.code === 200) {
+        console.log(res)
+        this.filteredCoolingRoomTypes = res.data;
+      }
+    });
   }
 
   getCustomers() {
     const value = this.stockDetailsForm.get('customer')?.value;
-    if (value?.length > 2) {
       this.customerService.search(0, 10, value).subscribe(res => {
         console.log(res)
         if (res.code === 200) {
@@ -86,17 +101,37 @@ export class CreateStockFormComponent implements OnInit {
           this.filteredCustomers = res.data;
         }
       });
-    }
   }
 
   getCoolingRoms() {
-    this.coolingRoomService.getAll(0, 10, 1).subscribe(res => {
+    this.coolingRoomService.getAllAvailableCoolingRoomsByType(0, 10,<number>this.selectedCoolingRoomType?.id).subscribe(res => {
       console.log(res)
       if (res.code === 200) {
         console.log(res)
-        this.filteredCoolingRooms = res.data;
+        this.filteredCoolingRooms = this.filterCoolingRooms([res.data]);
+        this.stockDescDetailsForm?.enable();
+
       }
     });
+  }
+
+  filterCoolingRooms(ar:CoolingRoomDTO[]):CoolingRoomDTO[]{
+    return  ar?.filter(el=>{
+      for (let i = 0; i < this.selectedDescriptionDTOS.length; i++) {
+        if (el.id===this.selectedDescriptionDTOS[i].coolingRoomId){
+          return false;
+        }
+      }
+      return true;
+
+    })
+  }
+
+  descFormReset(){
+    this.stockDescDetailsForm.reset();
+    this.selectedCoolingRoom=null;
+    this.filteredCoolingRooms=[];
+    this.selectedCoolingRoomType=null;
   }
 
   onAction(): void {
@@ -110,13 +145,17 @@ export class CreateStockFormComponent implements OnInit {
       }
       sub.subscribe(res => {
         this.apiResponse = false;
-        if (res.code === 201||res.code===204) {
-          this.stockDetailsForm.reset();
-        }else if(res.code===204){
-          if (this.formMode==='UPDATE'){
-            this.router.navigate(['..'], {relativeTo: this.activatedRoute});
-          }
-        }
+        let blob = new Blob([res], {type: 'application/pdf'});
+        let pdfUrl = window.URL.createObjectURL(blob);
+        console.log(pdfUrl);
+        printJS(pdfUrl, 'pdf');
+        // if (res.code === 201||res.code===204) {
+        //   this.stockDetailsForm.reset();
+        // }else if(res.code===204){
+        //   if (this.formMode==='UPDATE'){
+        //     this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+        //   }
+        // }
       }, error => {
         this.apiResponse = false;
       });
@@ -134,7 +173,7 @@ export class CreateStockFormComponent implements OnInit {
   private createStock(): Observable<any> {
     let token=new TokenDTO(
       0,
-      '',
+      this.stockDetailsForm.get('whoIssued')?.value,
       this.pipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss') as string,
       this.selectedCustomer.id,
       this.selectedCustomer.shopOwnerName,
@@ -175,12 +214,18 @@ export class CreateStockFormComponent implements OnInit {
         Number(this.selectedDescriptionDTOS.length),
         this.stockDescDetailsForm.get('fishName')?.value,
         this.stockDescDetailsForm.get('fishWeight')?.value,
-        this.selectedCoolingRoom.id,
+        <number>this.selectedCoolingRoom?.id,
         0,
         1,
       );
       this.selectedDescriptionDTOS.push(x);
       this.dataSource = new MatTableDataSource(this.selectedDescriptionDTOS);
+      this.descFormReset();
     }
+  }
+
+  selectCoolingRoomType(option: CoolingRoomTypeDTO) {
+    this.selectedCoolingRoomType=option;
+    this.getCoolingRoms();
   }
 }

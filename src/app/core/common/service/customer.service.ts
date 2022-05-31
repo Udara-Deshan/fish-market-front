@@ -38,7 +38,7 @@ export class CustomerService {
       params:new HttpParams()
         .append('page',page)
         .append('size',size)
-        .append('value',size)
+        .append('value',value)
     });
   }
 

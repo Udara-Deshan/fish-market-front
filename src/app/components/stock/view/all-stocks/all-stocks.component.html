@@ -1,1 +1,65 @@
-<p>all-stocks works!</p>
+<div id="main">
+  <div id="body">
+    <div id="header">
+      <div class="header-content">
+        <div id="header-title">
+          <span style="margin-right: 10px">All Customers</span>
+        </div>
+        <div>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <table [dataSource]="dataSource" mat-table>
+          <ng-container matColumnDef="action">
+            <th *matHeaderCellDef mat-header-cell> Action</th>
+            <td *matCellDef="let row" mat-cell>
+              <div id="buttons">
+                <mat-icon  (click)="updateStock(row)">edit</mat-icon>
+<!--                <mat-icon (click)="delete(row)">delete</mat-icon>-->
+                <mat-icon (click)="pay(row)">payment</mat-icon>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell> ID</th>
+            <td *matCellDef="let element" mat-cell> {{element?.tokenDTO.id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="whoIssued">
+            <th *matHeaderCellDef mat-header-cell>Who Issued</th>
+            <td *matCellDef="let element" mat-cell> {{element?.tokenDTO.whoIssued}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createDate">
+            <th *matHeaderCellDef mat-header-cell>Create Date</th>
+            <td *matCellDef="let element" mat-cell> {{element?.tokenDTO.createDate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerName">
+            <th *matHeaderCellDef mat-header-cell>Customer Name</th>
+            <td *matCellDef="let element" mat-cell>{{element?.tokenDTO.customerName}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerId">
+            <th *matHeaderCellDef mat-header-cell>Customer Id</th>
+            <td *matCellDef="let element" mat-cell>{{element?.tokenDTO.customerId}}</td>
+          </ng-container>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [colSpan]="displayedColumns.length"><app-progress-spinner [mode]="'TABLE'"></app-progress-spinner></td>
+          </tr>
+
+          <tr *matHeaderRowDef="displayedColumns" id="table" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+
+
+      </div>
+    </div>
+    <mat-paginator (page)="tempPageEvent=getServerData($event)" [pageSizeOptions]="pageSizeOptions"
+                   showFirstLastButtons></mat-paginator>
+  </div>
+</div>

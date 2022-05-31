@@ -46,4 +46,11 @@ export class CoolingRoomService {
       );
     });
   }
+  getAllAvailableCoolingRoomsByType(page:number,size:number,typeId:number):Observable<any>{
+    return this.httpClient.get(this.url+'/'+typeId,{
+      params:new HttpParams()
+        .append('page',page)
+        .append('size',size)
+    });
+  }
 }
