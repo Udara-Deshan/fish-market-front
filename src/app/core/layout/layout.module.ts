@@ -17,6 +17,8 @@ import { MenuContainerComponent } from './left-side-nav-bar/inner-component/manu
 import {MatMenuModule} from "@angular/material/menu";
 import { SharedModule } from '../../components/shared/shared.module';
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     LeftSideNavBarComponent,
     TopBarComponent,
     ClientComponent,
-    MenuContainerComponent
+    MenuContainerComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     MatSelectModule,
     MatMenuModule,
     SharedModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgApexchartsModule
   ]
 })
 export class LayoutModule { }

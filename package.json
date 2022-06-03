@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "apexcharts": "^3.35.3",
+    "ng-apexcharts": "^1.7.1",
     "ngx-toastr": "^14.3.0",
     "print-js": "^1.6.0",
     "rxjs": "~7.5.0",

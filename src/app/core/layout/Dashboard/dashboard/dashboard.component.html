@@ -1,0 +1,43 @@
+<div style="width: 100%;height: 100%;display:flex;">
+  <div style="width: 70%;height: auto;display: flex;flex-direction: column;justify-content: space-around;padding: 10px 20px">
+
+    <div class="mat-elevation-z3" style="padding: 15px 15px ;border-radius: 5px">
+      <span style="font-size: 1.2rem;color: gray;">Dashboard</span>
+      <div class="parent" style="height: auto;padding-top: 20px">
+        <div class="div1 mat-elevation-z3">
+          <h1> More Than 3 Days</h1>
+          <h1>41</h1>
+        </div>
+        <div class="div2 mat-elevation-z3">
+          <h1> More Than 3 Days</h1>
+          <h1>41</h1></div>
+        <div class="div3 mat-elevation-z3">
+          <h1> More Than 3 Days</h1>
+          <h1>41</h1>
+        </div>
+        <div class="div4 mat-elevation-z3">
+          <h1> More Than 3 Days</h1>
+          <h1>41</h1>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mat-elevation-z3" style="padding: 15px 15px ;border-radius: 5px">
+      <span style="font-size: 1.2rem;color: gray;">Availability</span>
+        <div #chart *ngIf="chartOptions" style="display: flex;justify-content: center;">
+          <apx-chart
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [plotOptions]="chartOptions.plotOptions"
+            [series]="chartOptions.series"
+          ></apx-chart>
+      </div>
+    </div>
+
+  </div>
+  <div style="width: 30%;height: 100%">
+
+
+  </div>
+</div>
