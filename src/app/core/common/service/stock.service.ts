@@ -13,11 +13,13 @@ export class StockService {
   ) { }
 
   create(stockDTO:StockDTO):Observable<any>{
-    return this.httpClient.post(this.url,stockDTO,{responseType: 'blob',});
+    return this.httpClient.post(this.url,stockDTO,{
+      responseType: 'blob',});
   }
 
   update(stockDTO:StockDTO):Observable<any>{
-    return this.httpClient.put(this.url,stockDTO,{responseType: 'blob',});
+    return this.httpClient.put(this.url,stockDTO,{
+      responseType: 'blob',});
   }
 
   delete(id:number):Observable<any>{

@@ -12,6 +12,7 @@ export class ErrorService {
               private authenticationService:AuthenticationService) { }
 
   handle(error: any): void {
+    console.log(error)
     if (error.status === 400){
       this.handle_400(error);
     }else if (error.status === 401){

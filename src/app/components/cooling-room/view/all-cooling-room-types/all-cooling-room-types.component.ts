@@ -84,7 +84,7 @@ export class AllCoolingRoomTypesComponent implements OnInit {
   }
 
   update(coolingRoomTypeDTO:CoolingRoomTypeDTO):void {
-    this.router.navigate([`home/coolingRoomTypes/all/${coolingRoomTypeDTO.id}`]);
+    this.router.navigate([`home/cooling-room/type/all/${coolingRoomTypeDTO.id}`]);
   }
 
 

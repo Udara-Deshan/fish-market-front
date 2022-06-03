@@ -25,7 +25,7 @@ export class AllCoolingRoomsComponent implements OnInit {
   tempPageEvent!: PageEvent;
 
   pageSizeOptions: number[];
-  stateFilter = new FormControl('1');
+  stateFilter = new FormControl(1);
 
   constructor(public coolingRoomService: CoolingRoomService,
               public dialog:MatDialog,
@@ -56,11 +56,11 @@ export class AllCoolingRoomsComponent implements OnInit {
   }
 
   public loadTable(pageIndex: number, pageSize: number): void {
-    this.coolingRoomService.getAll(pageIndex, pageSize,1)
+    this.coolingRoomService.getAll(pageIndex, pageSize,this.stateFilter.value)
       .subscribe(result => {
         console.log(result);
-        this.paginator.length = result.data.count;
-        this.dataSource = result.data.list;
+        this.paginator.length = result.data.length;
+        this.dataSource = result.data;
       }, error => {
         console.log(error);
       });
@@ -85,7 +85,7 @@ export class AllCoolingRoomsComponent implements OnInit {
   }
 
   update(coolingRoomDTO:CoolingRoomDTO):void {
-    this.router.navigate([`home/coolingRooms/all/${coolingRoomDTO.id}`]);
+    this.router.navigate([`home/cooling-room/all/${coolingRoomDTO.id}`]);
   }
 
 }

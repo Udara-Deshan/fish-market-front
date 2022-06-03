@@ -8,10 +8,10 @@
         <div>
           <div class="form-header-filters ">
             <mat-select [formControl]="stateFilter" (ngModelChange)="refreshTable()" >
-              <mat-option value="1" >
+              <mat-option [value]="1" >
                 Available
               </mat-option>
-              <mat-option value="2">
+              <mat-option [value]="2">
                Not Available
               </mat-option>
             </mat-select>

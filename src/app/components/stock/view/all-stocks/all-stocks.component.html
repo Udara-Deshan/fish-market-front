@@ -26,26 +26,26 @@
           </ng-container>
           <ng-container matColumnDef="id">
             <th *matHeaderCellDef mat-header-cell> ID</th>
-            <td *matCellDef="let element" mat-cell> {{element?.tokenDTO.id}} </td>
+            <td *matCellDef="let element" mat-cell> {{element?.id}} </td>
           </ng-container>
           <ng-container matColumnDef="whoIssued">
             <th *matHeaderCellDef mat-header-cell>Who Issued</th>
-            <td *matCellDef="let element" mat-cell> {{element?.tokenDTO.whoIssued}} </td>
+            <td *matCellDef="let element" mat-cell> {{element?.whoIssued}} </td>
           </ng-container>
 
           <ng-container matColumnDef="createDate">
             <th *matHeaderCellDef mat-header-cell>Create Date</th>
-            <td *matCellDef="let element" mat-cell> {{element?.tokenDTO.createDate}} </td>
+            <td *matCellDef="let element" mat-cell> {{element?.createDate}} </td>
           </ng-container>
 
           <ng-container matColumnDef="customerName">
             <th *matHeaderCellDef mat-header-cell>Customer Name</th>
-            <td *matCellDef="let element" mat-cell>{{element?.tokenDTO.customerName}}</td>
+            <td *matCellDef="let element" mat-cell>{{element?.customerName}}</td>
           </ng-container>
 
           <ng-container matColumnDef="customerId">
             <th *matHeaderCellDef mat-header-cell>Customer Id</th>
-            <td *matCellDef="let element" mat-cell>{{element?.tokenDTO.customerId}}</td>
+            <td *matCellDef="let element" mat-cell>{{element?.customerId}}</td>
           </ng-container>
 
           <tr class="mat-row" *matNoDataRow>

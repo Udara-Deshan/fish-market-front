@@ -29,9 +29,9 @@ export class CreateStockFormComponent implements OnInit {
   filteredCustomers!: CustomerDTO[];
   selectedCustomer!: CustomerDTO;
   filteredCoolingRoomTypes!: CoolingRoomTypeDTO[];
-  selectedCoolingRoomType!: CoolingRoomTypeDTO |null;
+  selectedCoolingRoomType!: CoolingRoomTypeDTO | null;
   filteredCoolingRooms!: CoolingRoomDTO[];
-  selectedCoolingRoom!: CoolingRoomDTO |null;
+  selectedCoolingRoom!: CoolingRoomDTO | null;
   selectedDescriptionDTOS: DescriptionDTO[] = [];
   dataSource: MatTableDataSource<DescriptionDTO>;
   displayedColumns: string[] = ['action', 'id', 'fishName', 'fishWeight', 'coolingRoomId', 'tokenId', 'price'];
@@ -49,9 +49,9 @@ export class CreateStockFormComponent implements OnInit {
   ) {
     this.dataSource = new MatTableDataSource(this.selectedDescriptionDTOS);
 
-    let t1=['3','341'];
-    let t2=['145','224','3354','3','348','3452','341'];
-    console.log(t2.filter(el=>!t1.includes(el)));
+    let t1 = ['3', '341'];
+    let t2 = ['145', '224', '3354', '3', '348', '3452', '341'];
+    console.log(t2.filter(el => !t1.includes(el)));
     console.log('ff')
 
 
@@ -73,7 +73,10 @@ export class CreateStockFormComponent implements OnInit {
         let res = await this.stockService.getById(Object.values(params)[0]);
         this.currentStock = res.data;
         this.formMode = 'UPDATE';
-        // this.stockDetailsForm.get('shopName')?.setValue(this.currentStock.shopName);
+        this.stockDetailsForm.get('customer')?.setValue(this.currentStock.tokenDTO.customerName);
+        this.stockDetailsForm.get('whoIssued')?.setValue(this.currentStock.tokenDTO.whoIssued);
+        this.selectedDescriptionDTOS=this.currentStock.descriptionDTOS;
+        this.dataSource = new MatTableDataSource(this.selectedDescriptionDTOS);
         // this.stockDetailsForm.get('shopOwnerName')?.setValue(this.currentStock.shopOwnerName);
         // this.stockDetailsForm.get('nic')?.setValue(this.currentStock.nic);
         // this.stockDetailsForm.get('contactNo')?.setValue(this.currentStock.contactNo);
@@ -82,7 +85,7 @@ export class CreateStockFormComponent implements OnInit {
     this.getCoolingRoomTypes();
   }
 
-  getCoolingRoomTypes(){
+  getCoolingRoomTypes() {
     this.coolingRoomTypeService.getAll(0, 10).subscribe(res => {
       console.log(res)
       if (res.code === 200) {
@@ -94,44 +97,42 @@ export class CreateStockFormComponent implements OnInit {
 
   getCustomers() {
     const value = this.stockDetailsForm.get('customer')?.value;
-      this.customerService.search(0, 10, value).subscribe(res => {
+    this.customerService.search(0, 10, value).subscribe(res => {
+      console.log(res)
+      if (res.code === 200) {
         console.log(res)
-        if (res.code === 200) {
-          console.log(res)
-          this.filteredCustomers = res.data;
-        }
-      });
+        this.filteredCustomers = res.data;
+      }
+    });
   }
 
   getCoolingRoms() {
-    this.coolingRoomService.getAllAvailableCoolingRoomsByType(0, 10,<number>this.selectedCoolingRoomType?.id).subscribe(res => {
+    this.coolingRoomService.getAllAvailableCoolingRoomsByType(0, 10, <number>this.selectedCoolingRoomType?.id).subscribe(res => {
       console.log(res)
       if (res.code === 200) {
         console.log(res)
         this.filteredCoolingRooms = this.filterCoolingRooms([res.data]);
         this.stockDescDetailsForm?.enable();
-
       }
     });
   }
 
-  filterCoolingRooms(ar:CoolingRoomDTO[]):CoolingRoomDTO[]{
-    return  ar?.filter(el=>{
+  filterCoolingRooms(ar: CoolingRoomDTO[]): CoolingRoomDTO[] {
+    return ar?.filter(el => {
       for (let i = 0; i < this.selectedDescriptionDTOS.length; i++) {
-        if (el.id===this.selectedDescriptionDTOS[i].coolingRoomId){
+        if (el.id === this.selectedDescriptionDTOS[i].coolingRoomId) {
           return false;
         }
       }
       return true;
-
     })
   }
 
-  descFormReset(){
+  descFormReset() {
     this.stockDescDetailsForm.reset();
-    this.selectedCoolingRoom=null;
-    this.filteredCoolingRooms=[];
-    this.selectedCoolingRoomType=null;
+    this.selectedCoolingRoom = null;
+    this.filteredCoolingRooms = [];
+    this.selectedCoolingRoomType = null;
   }
 
   onAction(): void {
@@ -147,15 +148,10 @@ export class CreateStockFormComponent implements OnInit {
         this.apiResponse = false;
         let blob = new Blob([res], {type: 'application/pdf'});
         let pdfUrl = window.URL.createObjectURL(blob);
-        console.log(pdfUrl);
-        printJS(pdfUrl, 'pdf');
-        // if (res.code === 201||res.code===204) {
-        //   this.stockDetailsForm.reset();
-        // }else if(res.code===204){
-        //   if (this.formMode==='UPDATE'){
-        //     this.router.navigate(['..'], {relativeTo: this.activatedRoute});
-        //   }
-        // }
+        window.open(pdfUrl);
+        if (this.formMode === 'UPDATE') {
+          this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+        }
       }, error => {
         this.apiResponse = false;
       });
@@ -171,7 +167,7 @@ export class CreateStockFormComponent implements OnInit {
   }
 
   private createStock(): Observable<any> {
-    let token=new TokenDTO(
+    let token = new TokenDTO(
       0,
       this.stockDetailsForm.get('whoIssued')?.value,
       this.pipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss') as string,
@@ -187,7 +183,7 @@ export class CreateStockFormComponent implements OnInit {
   }
 
   private updateStock(): Observable<any> {
-    let token=new TokenDTO(
+    let token = new TokenDTO(
       this.currentStock?.tokenDTO?.id,
       this.currentStock?.tokenDTO?.whoIssued,
       this.pipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss') as string,
@@ -204,7 +200,7 @@ export class CreateStockFormComponent implements OnInit {
 
   removeDesc(row: any) {
 
-    this.selectedDescriptionDTOS = this.selectedDescriptionDTOS.filter(el=>el.id!==row.id);
+    this.selectedDescriptionDTOS = this.selectedDescriptionDTOS.filter(el => el.id !== row.id);
     this.dataSource = new MatTableDataSource(this.selectedDescriptionDTOS);
   }
 
@@ -225,7 +221,7 @@ export class CreateStockFormComponent implements OnInit {
   }
 
   selectCoolingRoomType(option: CoolingRoomTypeDTO) {
-    this.selectedCoolingRoomType=option;
+    this.selectedCoolingRoomType = option;
     this.getCoolingRoms();
   }
 }

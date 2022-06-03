@@ -18,9 +18,11 @@ export class AlertAndErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap(evt => {
+        console.log(evt)
         this.alertService.handle(request, evt);
       }),
       catchError(err => {
+        console.log(err)
         this.errorService.handle(err);
         return throwError(err.error.message || err.statusText);
       }));  }

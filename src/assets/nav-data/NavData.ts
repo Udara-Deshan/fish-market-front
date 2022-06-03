@@ -1,4 +1,5 @@
 export const NavData=[
+
   {
     menuName: 'Customer',
     url: '',
