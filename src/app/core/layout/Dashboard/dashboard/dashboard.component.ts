@@ -6,6 +6,7 @@ import {
   ApexChart, ChartComponent
 } from "ng-apexcharts";
 import {DashboardService} from "../../../common/service/dashboard.service";
+import {ReportsService} from "../../../common/service/reports.service";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries|any;
@@ -31,7 +32,7 @@ export class DashboardComponent implements OnInit{
   dailyStock: number=0;
   dailyIncome: number=0;
 
-  constructor(private dashboardService:DashboardService) {
+  constructor(private dashboardService:DashboardService,private reportsService: ReportsService) {
     this.chartOptions = {
       series: [0],
       chart: {
@@ -76,5 +77,11 @@ export class DashboardComponent implements OnInit{
        })
     }
 
-
+  getReports(type: string) {
+    this.reportsService.getReport(type).subscribe(res => {
+      let blob = new Blob([res], {type: 'application/pdf'});
+      let pdfUrl = window.URL.createObjectURL(blob);
+      window.open(pdfUrl);
+    })
+  }
 }

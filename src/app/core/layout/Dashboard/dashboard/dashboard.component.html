@@ -5,20 +5,20 @@
       <span style="font-size: 1.1rem;color: gray;">Dashboard</span>
         <div class="parent" >
           <div class="row1">
-            <div class="div1 tile">
+            <div class="div1 tile" (click)="getReports('3Day')">
               <span> More Than 3 Days</span>
               <span>{{day3Count}}</span>
             </div>
-            <div class="div2 tile">
+            <div class="div2 tile" (click)="getReports('7Day')">
               <span> More Than 7 Days</span>
               <span>{{day7Count}}</span></div>
-            <div class="div3 tile">
+            <div class="div3 tile"  (click)="getReports('daily-stock')">
               <span>Daily Stock</span>
               <span>{{dailyStock}}</span>
             </div>
           </div>
           <div class="row2">
-            <div class="div4 tile">
+            <div class="div4 tile" (click)="getReports('daily-paid')">
               <span>Daily Income</span>
               <span>Rs : {{dailyIncome}}</span>
             </div>
