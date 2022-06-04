@@ -31,7 +31,7 @@
 
     <div class="mat-elevation-z3" style="padding: 15px 15px;border-radius: 5px;height: auto">
       <span style="font-size: 1.2rem;color: gray;">Availability</span>
-        <div #chart *ngIf="chartOptions" style="display: flex;justify-content: center;">
+        <div #chart *ngIf="chartOptions" style="display: flex;justify-content: center;" [routerLink]="'cooling-room/all'">
           <apx-chart
             [chart]="chartOptions.chart"
             [labels]="chartOptions.labels"
