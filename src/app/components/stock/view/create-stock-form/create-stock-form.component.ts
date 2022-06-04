@@ -149,10 +149,13 @@ export class CreateStockFormComponent implements OnInit {
       sub.subscribe(res => {
         this.apiResponse = false;
         this.resetForms();
-        let blob = new Blob([res], {type: 'application/pdf'});
-        let pdfUrl = window.URL.createObjectURL(blob);
-        window.open(pdfUrl);
-        if (this.formMode === 'UPDATE') {
+        if (this.formMode == 'CREATE') {
+          let blob = new Blob([res], {type: 'application/pdf'});
+          let pdfUrl = window.URL.createObjectURL(blob);
+          window.open(pdfUrl);
+        }
+
+        if (this.formMode == 'UPDATE') {
           this.router.navigate(['..'], {relativeTo: this.activatedRoute});
         }
       }, error => {
