@@ -16,7 +16,7 @@ import {ApprovalDialogConfig} from "../../../../core/dialogs/approval-dialog/mod
   styleUrls: ['./all-customers.component.scss']
 })
 export class AllCustomersComponent implements OnInit {
-  displayedColumns: string[] = ['action', 'id','shopName','shopOwnerName','nic','contactNo'];
+  displayedColumns: string[] = [ 'id','shopName','shopOwnerName','nic','contactNo','action'];
   dataSource: MatTableDataSource<Array<CustomerDTO>>;
   customers!: Array<CustomerDTO>[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -84,6 +84,6 @@ export class AllCustomersComponent implements OnInit {
   }
 
   updateCustomer(customerDTO:CustomerDTO):void {
-    this.router.navigate([`home/customers/all/${customerDTO.id}`]);
+    this.router.navigate([`home/customer/all/${customerDTO.id}`]);
   }
 }

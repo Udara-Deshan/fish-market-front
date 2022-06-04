@@ -26,12 +26,23 @@ export class StockService {
     return this.httpClient.delete(`${this.url}/${id}`,{});
   }
 
-  getAll(page:number,size:number):Observable<any>{
-    return this.httpClient.get(this.url,{
-      params:new HttpParams()
-        .append('page',page)
-        .append('size',size)
-    });
+  getAll(page: number, size: number, search: number):Observable<any>{
+    if (search){
+      return this.httpClient.get(this.url+'/search',{
+        params:new HttpParams()
+          .append('value',search)
+          .append('page',page)
+          .append('size',size)
+
+      });
+    }else {
+      return this.httpClient.get(this.url,{
+        params:new HttpParams()
+          .append('page',page)
+          .append('size',size)
+      });
+    }
+
   }
 
   getById(id: string):Promise<any>{

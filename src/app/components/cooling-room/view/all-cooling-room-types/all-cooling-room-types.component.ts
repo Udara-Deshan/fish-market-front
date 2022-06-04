@@ -17,7 +17,7 @@ import {CoolingRoomTypeService} from "../../../../core/common/service/cooling-ro
 })
 export class AllCoolingRoomTypesComponent implements OnInit {
 
-  displayedColumns: string[] = ['action', 'id','typeName','typePrice'];
+  displayedColumns: string[] = [ 'id','typeName','typePrice','action'];
   dataSource: MatTableDataSource<Array<CoolingRoomTypeDTO>>;
   coolingRoomTypes!: Array<CoolingRoomTypeDTO>[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -1,4 +1,10 @@
 export const NavData=[
+  {
+    menuName: 'Dashboard',
+    url: '/home/',
+    icon: 'dashboard',
+    list:[]
+  },
 
   {
     menuName: 'Customer',
@@ -12,7 +18,7 @@ export const NavData=[
         list: []
       },
       {
-        menuName: 'All Customers',
+        menuName: 'View Customers',
         url: 'customer/all',
         icon: '',
         list: []
@@ -31,7 +37,7 @@ export const NavData=[
         list: []
       },
       {
-        menuName: 'All Cooling Rooms',
+        menuName: 'View Cooling Rooms',
         url: 'cooling-room/all',
         icon: '',
         list: []
@@ -43,7 +49,7 @@ export const NavData=[
         list: []
       },
       {
-        menuName: 'All Cooling Room Types',
+        menuName: 'View Cooling Room Types',
         url: 'cooling-room/type/all',
         icon: '',
         list: []
@@ -62,7 +68,7 @@ export const NavData=[
         list: []
       },
       {
-        menuName: 'All Stocks',
+        menuName: 'View Stocks',
         url: 'stock/all',
         icon: '',
         list: []

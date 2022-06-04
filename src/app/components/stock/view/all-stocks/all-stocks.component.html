@@ -3,9 +3,18 @@
     <div id="header">
       <div class="header-content">
         <div id="header-title">
-          <span style="margin-right: 10px">All Customers</span>
+          <span style="margin-right: 10px">View Stocks</span>
         </div>
         <div>
+          <div class="form-header-filters ">
+            <form class="form-header-search form-header-label">
+              <label for="search-filed">
+                <mat-icon>search</mat-icon>
+              </label>
+              <input type="number" id="search-filed"  placeholder="Token Id"  [formControl]="searchKeyWord"
+                     (keyup)="refreshTable()">
+            </form>
+          </div>
         </div>
       </div>
       <div>
@@ -19,7 +28,7 @@
             <td *matCellDef="let row" mat-cell>
               <div id="buttons">
                 <mat-icon  (click)="updateStock(row)">edit</mat-icon>
-<!--                <mat-icon (click)="delete(row)">delete</mat-icon>-->
+                <mat-icon (click)="delete(row)">delete</mat-icon>
                 <mat-icon (click)="pay(row)">payment</mat-icon>
               </div>
             </td>

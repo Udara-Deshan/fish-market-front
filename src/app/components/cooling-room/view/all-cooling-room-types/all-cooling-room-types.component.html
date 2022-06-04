@@ -3,7 +3,7 @@
     <div id="header">
       <div class="header-content">
         <div id="header-title">
-          <span style="margin-right: 10px">All Cooling Rooms</span>
+          <span style="margin-right: 10px">View Cooling Rooms</span>
         </div>
         <div>
         </div>
@@ -29,12 +29,12 @@
           </ng-container>
 
           <ng-container matColumnDef="typeName">
-            <th *matHeaderCellDef mat-header-cell>Type Name</th>
+            <th *matHeaderCellDef mat-header-cell>Room Temperature( &#8451;)</th>
             <td *matCellDef="let element" mat-cell> {{element.typeName}} </td>
           </ng-container>
 
           <ng-container matColumnDef="typePrice">
-            <th *matHeaderCellDef mat-header-cell>Type Price</th>
+            <th *matHeaderCellDef mat-header-cell>Price Per Kg</th>
             <td *matCellDef="let element" mat-cell> {{element.typePrice}} </td>
           </ng-container>
 

@@ -16,12 +16,12 @@
       <form  [formGroup]="coolingRoomDetailsForm">
         <div class="form-row">
           <mat-form-field appearance="outline">
-            <mat-label>Room Number</mat-label>
+            <mat-label>Rack Number</mat-label>
             <input formControlName="roomNumber" matInput placeholder="Type Hear...">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Room Type</mat-label>
+            <mat-label>Temperature( &#8451;)</mat-label>
             <mat-select formControlName="roomTypeId" >
               <mat-option *ngFor="let option of filteredCoolingRoomTypes" [value]="option.typeName"
                           (click)="selectedCoolingRoomType=option">

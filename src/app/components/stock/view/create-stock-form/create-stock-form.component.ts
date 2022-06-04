@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DescriptionDTO, StockDTO, TokenDTO} from "../../../../core/common/dto/StockDTO";
@@ -12,7 +12,6 @@ import {CoolingRoomService} from "../../../../core/common/service/cooling-room.s
 import {Observable} from "rxjs";
 import {CoolingRoomTypeDTO} from "../../../../core/common/dto/CoolingRoomTypeDTO";
 import {CoolingRoomTypeService} from "../../../../core/common/service/cooling-room-type.service";
-import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-create-stock-form',
@@ -34,7 +33,7 @@ export class CreateStockFormComponent implements OnInit {
   selectedCoolingRoom!: CoolingRoomDTO | null;
   selectedDescriptionDTOS: DescriptionDTO[] = [];
   dataSource: MatTableDataSource<DescriptionDTO>;
-  displayedColumns: string[] = ['action', 'id', 'fishName', 'fishWeight', 'coolingRoomId', 'tokenId', 'price'];
+  displayedColumns: string[] = [ 'id', 'fishName', 'fishWeight', 'coolingRoomId', 'tokenId', 'price','action'];
   fakeList: string[] = ['id', 'fishName', 'fishWeight', 'coolingRoomId', 'tokenId', 'price'];
 
 
@@ -72,6 +71,8 @@ export class CreateStockFormComponent implements OnInit {
       if (params.hasOwnProperty('id')) {
         let res = await this.stockService.getById(Object.values(params)[0]);
         this.currentStock = res.data;
+        let res2=await this.customerService.getById(String(this.currentStock.tokenDTO.customerId));
+        this.selectedCustomer=res2.data;
         this.formMode = 'UPDATE';
         this.stockDetailsForm.get('customer')?.setValue(this.currentStock.tokenDTO.customerName);
         this.stockDetailsForm.get('whoIssued')?.setValue(this.currentStock.tokenDTO.whoIssued);
@@ -142,10 +143,12 @@ export class CreateStockFormComponent implements OnInit {
       if (this.formMode === 'CREATE') {
         sub = this.createStock();
       } else {
+        console.log('heara')
         sub = this.updateStock();
       }
       sub.subscribe(res => {
         this.apiResponse = false;
+        this.resetForms();
         let blob = new Blob([res], {type: 'application/pdf'});
         let pdfUrl = window.URL.createObjectURL(blob);
         window.open(pdfUrl);
@@ -162,6 +165,10 @@ export class CreateStockFormComponent implements OnInit {
     this.stockDetailsForm.reset();
   }
 
+  resetForms(){
+    this.stockDetailsForm.reset();
+    this.selectedDescriptionDTOS=[];
+  }
   Cancel() {
     this.router.navigate(['..'], {relativeTo: this.activatedRoute});
   }
@@ -187,9 +194,9 @@ export class CreateStockFormComponent implements OnInit {
       this.currentStock?.tokenDTO?.id,
       this.currentStock?.tokenDTO?.whoIssued,
       this.pipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss') as string,
-      this.selectedCustomer.id,
-      this.selectedCustomer.shopOwnerName,
-      1
+      this.selectedCustomer?.id,
+      this.selectedCustomer?.shopOwnerName,
+      this.currentStock?.tokenDTO?.status,
     );
     return this.stockService.update(new StockDTO(
       token,

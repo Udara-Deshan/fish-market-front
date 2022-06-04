@@ -94,7 +94,7 @@ export class AddCustomerComponent implements OnInit {
       this.customerDetailsForm.get('shopOwnerName')?.value,
       this.customerDetailsForm.get('nic')?.value,
       this.customerDetailsForm.get('contactNo')?.value,
-      0
+      this.currentCustomer.status
     ))
   }
 

@@ -17,7 +17,7 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./all-cooling-rooms.component.scss']
 })
 export class AllCoolingRoomsComponent implements OnInit {
-  displayedColumns: string[] = ['action', 'id','roomNumber','roomTypeId'];
+  displayedColumns: string[] = [ 'id','roomNumber','roomTypeId','action'];
   dataSource: MatTableDataSource<Array<CoolingRoomDTO>>;
   coolingRooms!: Array<CoolingRoomDTO>[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;

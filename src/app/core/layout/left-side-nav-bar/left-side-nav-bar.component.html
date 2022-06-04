@@ -2,6 +2,17 @@
   <mat-sidenav-container class="left-side-nav" >
     <mat-sidenav mode="side" [opened]="navState" >
       <app-menu-container [Menus]="currentMenus"></app-menu-container>
+
+      <button [matMenuTriggerFor]="men1" mat-menu-item>
+        <mat-icon class="nav-btn-icon" >print</mat-icon>
+        Reports</button>
+      <mat-menu #men1="matMenu" xPosition="after" style="margin-left: 100px">
+
+        <button mat-menu-item (click)="getReports('3Day')">3 Day</button>
+        <button mat-menu-item (click)="getReports('7Day')">7 Day</button>
+        <button mat-menu-item (click)="getReports('daily-stock')">Daily Stock</button>
+        <button mat-menu-item (click)="getReports('daily-paid')">Daily Paid Stock</button>
+       </mat-menu>
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet ></router-outlet>

@@ -8,8 +8,8 @@ import {Router} from "@angular/router";
 import {SystemConfig} from "../../../../../assets/temp/SystemConfig";
 import {ApprovalDialogComponent} from "../../../../core/dialogs/approval-dialog/approval-dialog.component";
 import {ApprovalDialogConfig} from "../../../../core/dialogs/approval-dialog/model/ApprovalDialogConfig";
-import * as printJS from "print-js";
 import {TokenDTO} from "../../../../core/common/dto/StockDTO";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-all-stocks',
@@ -18,7 +18,7 @@ import {TokenDTO} from "../../../../core/common/dto/StockDTO";
 })
 export class AllStocksComponent implements OnInit {
 
-  displayedColumns: string[] = ['action', 'id', 'whoIssued', 'createDate', 'customerId', 'customerName'];
+  displayedColumns: string[] = ['id', 'whoIssued', 'createDate', 'customerId', 'customerName','action'];
   dataSource: MatTableDataSource<TokenDTO>;
   stocks!: TokenDTO[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -26,6 +26,7 @@ export class AllStocksComponent implements OnInit {
   tempPageEvent!: PageEvent;
 
   pageSizeOptions: number[];
+  searchKeyWord=new FormControl();
 
   constructor(public stockService: StockService,
               public dialog: MatDialog,
@@ -52,12 +53,14 @@ export class AllStocksComponent implements OnInit {
   }
 
 
+
   refreshTable(): void {
-    this.loadTable(this.paginator.pageIndex, this.paginator.pageSize);
+    console.log(this.searchKeyWord.value)
+    this.loadTable(this.paginator.pageIndex, this.paginator.pageSize,this.searchKeyWord.value);
   }
 
-  public loadTable(pageIndex: number, pageSize: number): void {
-    this.stockService.getAll(pageIndex, pageSize)
+  public loadTable(pageIndex: number, pageSize: number, search: number): void {
+    this.stockService.getAll(pageIndex, pageSize,search)
       .subscribe(result => {
         console.log(result);
         this.paginator.length = result.data.length;
@@ -68,21 +71,21 @@ export class AllStocksComponent implements OnInit {
   }
 
   public getServerData(event: PageEvent): any {
-    this.loadTable(event.pageIndex, event.pageSize);
+    this.loadTable(event.pageIndex, event.pageSize, this.searchKeyWord.value);
   }
 
   delete(tokenDTO: TokenDTO): void {
-    // const approval = this.dialog.open(ApprovalDialogComponent, {
-    //   width: '350px',
-    //   data: new ApprovalDialogConfig('Delete', 'Warning !', 'Are you sure sir you want to delete this stock?')
-    // });
-    // approval.afterClosed().subscribe(approve => {
-    //   if (approve) {
-    //     this.stockService.delete(Number(tokenDTO.tokenDTO.id)).subscribe(res=>{
-    //       this.refreshTable();
-    //     });
-    //   }
-    // });
+    const approval = this.dialog.open(ApprovalDialogComponent, {
+      width: '350px',
+      data: new ApprovalDialogConfig('Delete', 'Warning !', 'Are you sure you want to delete this stock?')
+    });
+    approval.afterClosed().subscribe(approve => {
+      if (approve) {
+        this.stockService.delete(Number(tokenDTO.id)).subscribe(res=>{
+          this.refreshTable();
+        });
+      }
+    });
   }
 
   updateStock(tokenDTO: TokenDTO): void {
@@ -95,6 +98,7 @@ export class AllStocksComponent implements OnInit {
       let pdfUrl = window.URL.createObjectURL(blob);
       console.log(pdfUrl);
       window.open(pdfUrl, 'pdf');
+      this.refreshTable();
     })
   }
 }

@@ -3,7 +3,7 @@
     <div id="header">
       <div class="header-content">
         <div id="header-title">
-          <span style="margin-right: 10px">{{formMode.slice(0, 1)+formMode.slice(1).toLowerCase()}} Cooling Room</span>
+          <span style="margin-right: 10px">{{formMode=='CREATE'?'New':'Update'}} Cooling Room</span>
         </div>
         <div>
         </div>
@@ -16,11 +16,11 @@
       <form  [formGroup]="coolingRoomTypeDetailsForm">
         <div class="form-row">
           <mat-form-field appearance="outline">
-            <mat-label>Type Name</mat-label>
+            <mat-label>Room Temperature( &#8451;)</mat-label>
             <input formControlName="typeName" matInput placeholder="Type Hear...">
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Type Price</mat-label>
+            <mat-label>Price Per Kg</mat-label>
             <input formControlName="typePrice" matInput placeholder="Type Hear...">
           </mat-form-field>
         </div>

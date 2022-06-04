@@ -53,11 +53,10 @@ export class AddCoolingRoomTypeComponent implements OnInit {
         this.apiResponse = false;
         if (res.code === 201||res.code===204) {
           this.coolingRoomTypeDetailsForm.reset();
-        }else if(res.code===204){
+        }
           if (this.formMode==='UPDATE'){
             this.router.navigate(['..'], {relativeTo: this.activatedRoute});
           }
-        }
       }, error => {
         this.apiResponse = false;
       });

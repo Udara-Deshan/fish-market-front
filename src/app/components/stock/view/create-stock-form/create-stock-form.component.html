@@ -64,7 +64,7 @@
 
           <div class="form-row">
             <mat-form-field appearance="outline">
-              <mat-label>Room Type</mat-label>
+              <mat-label>Room Temperature( &#8451;)</mat-label>
               <mat-select formControlName="coolingRoomType">
                 <mat-option *ngFor="let option of filteredCoolingRoomTypes" [value]="option?.typeName"
                             (click)="selectCoolingRoomType(option)">
@@ -79,7 +79,7 @@
               </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Room</mat-label>
+              <mat-label>Rack</mat-label>
               <mat-select formControlName="coolingRoom">
                 <mat-option *ngFor="let option of filteredCoolingRooms" [value]="option?.roomNumber"
                             (click)="selectedCoolingRoom=option">

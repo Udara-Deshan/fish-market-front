@@ -1,11 +1,12 @@
 export class StockDTO {
+
   tokenDTO:TokenDTO;
   descriptionDTOS:DescriptionDTO[];
-
   constructor(tokenDTO: TokenDTO, descriptionDTOS: DescriptionDTO[]) {
     this.tokenDTO = tokenDTO;
     this.descriptionDTOS = descriptionDTOS;
   }
+
 }
 export class TokenDTO {
     id:number;

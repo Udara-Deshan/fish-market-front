@@ -1,0 +1,31 @@
+.form-header-search {
+  align-items: center;
+  text-align: center;
+
+  label {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+
+  input {
+    background-color: transparent;
+    border: 0;
+    width: 75%;
+    height: 100%;
+    justify-content: space-around;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
+.form-header-label {
+  margin-left: 10px;
+  border-radius: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 5px;
+  align-items: center;
+}

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 
 import {
   ApexNonAxisChartSeries,
@@ -51,6 +51,7 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
        this.dashboardService.getData().subscribe(res=>{
          this.day3Count=res?.data?.day3Count;
          this.day7Count=res?.data?.day7Count;
