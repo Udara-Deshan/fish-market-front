@@ -18,8 +18,7 @@ export class StockService {
   }
 
   update(stockDTO:StockDTO):Observable<any>{
-    return this.httpClient.put(this.url,stockDTO,{
-      responseType: 'blob',});
+    return this.httpClient.put(this.url,stockDTO,);
   }
 
   delete(id:number):Observable<any>{

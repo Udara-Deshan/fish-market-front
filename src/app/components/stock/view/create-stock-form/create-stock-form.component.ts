@@ -156,6 +156,8 @@ export class CreateStockFormComponent implements OnInit {
         }
 
         if (this.formMode == 'UPDATE') {
+          console.log('res')
+          console.log(res)
           this.router.navigate(['..'], {relativeTo: this.activatedRoute});
         }
       }, error => {
