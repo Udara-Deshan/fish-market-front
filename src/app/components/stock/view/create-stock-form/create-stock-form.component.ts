@@ -112,7 +112,7 @@ export class CreateStockFormComponent implements OnInit {
       console.log(res)
       if (res.code === 200) {
         console.log(res)
-        this.filteredCoolingRooms = this.filterCoolingRooms([res.data]);
+        this.filteredCoolingRooms = this.filterCoolingRooms(res.data);
         this.stockDescDetailsForm?.enable();
       }
     });
