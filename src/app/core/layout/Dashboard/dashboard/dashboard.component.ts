@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit{
   day3Count: number=0;
   day7Count: number=0;
   dailyStock: number=0;
-  dailyIncome: number=0;
+  dailyIncome: string='0';
 
   constructor(private dashboardService:DashboardService,private reportsService: ReportsService) {
     this.chartOptions = {
