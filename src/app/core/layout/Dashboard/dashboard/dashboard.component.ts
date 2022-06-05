@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit{
          this.dailyStock=res?.data?.dailyStock;
          this.dailyIncome=res?.data?.dailyIncome;
          this.chartOptions = {
-           series: [<number>res?.data?.available],
+           series: [<number>res?.data?.available.toPrecision(2)],
            chart: {
              height: 350,
              width:350,
