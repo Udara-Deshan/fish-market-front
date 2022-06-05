@@ -33,8 +33,8 @@ export class CreateStockFormComponent implements OnInit {
   selectedCoolingRoom!: CoolingRoomDTO | null;
   selectedDescriptionDTOS: DescriptionDTO[] = [];
   dataSource: MatTableDataSource<DescriptionDTO>;
-  displayedColumns: string[] = [ 'id', 'fishName', 'fishWeight', 'typeName', 'tokenId', 'price','action'];
-  fakeList: string[] = ['id', 'fishName', 'fishWeight', 'typeName', 'tokenId', 'price'];
+  displayedColumns: string[] = [ 'id', 'fishName', 'fishWeight', 'typeId', 'tokenId', 'price','action'];
+  fakeList: string[] = ['id', 'fishName', 'fishWeight', 'typeId', 'tokenId', 'price'];
 
 
   constructor(private formBuilder: FormBuilder,
