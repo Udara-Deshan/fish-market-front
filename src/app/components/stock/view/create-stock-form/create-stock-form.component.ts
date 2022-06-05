@@ -215,6 +215,9 @@ export class CreateStockFormComponent implements OnInit {
     this.selectedDescriptionDTOS = this.selectedDescriptionDTOS.filter(el => el.id !== row.id);
     this.dataSource = new MatTableDataSource(this.selectedDescriptionDTOS);
   }
+  totalCalc(temp:number,kg:number):number{
+    return temp*kg;
+  }
 
   addToList() {
     if (this.stockDescDetailsForm.valid) {
@@ -224,6 +227,7 @@ export class CreateStockFormComponent implements OnInit {
         this.stockDescDetailsForm.get('fishWeight')?.value,
         <number>this.selectedCoolingRoom?.id,
         0,
+        this.totalCalc(Number(this.selectedCoolingRoomType?.typePrice),this.stockDescDetailsForm.get('fishWeight')?.value),
         1,
       );
       this.selectedDescriptionDTOS.push(x);
