@@ -225,7 +225,7 @@ export class CreateStockFormComponent implements OnInit {
         Number(this.selectedDescriptionDTOS.length),
         this.stockDescDetailsForm.get('fishName')?.value,
         this.stockDescDetailsForm.get('fishWeight')?.value,
-        <number>this.selectedCoolingRoom?.id,
+        <number>this.selectedCoolingRoomType?.id,
         0,
         this.totalCalc(Number(this.selectedCoolingRoomType?.typePrice),this.stockDescDetailsForm.get('fishWeight')?.value),
         1,
