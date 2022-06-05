@@ -29,7 +29,7 @@ export class CreateStockFormComponent implements OnInit {
   selectedCustomer!: CustomerDTO;
   filteredCoolingRoomTypes!: CoolingRoomTypeDTO[];
   selectedCoolingRoomType!: CoolingRoomTypeDTO | null;
-  filteredCoolingRooms!: CoolingRoomDTO[];
+  filteredCoolingRooms!: any[];
   selectedCoolingRoom!: CoolingRoomDTO | null;
   selectedDescriptionDTOS: DescriptionDTO[] = [];
   dataSource: MatTableDataSource<DescriptionDTO>;
