@@ -33,8 +33,8 @@ export class CreateStockFormComponent implements OnInit {
   selectedCoolingRoom!: CoolingRoomDTO | null;
   selectedDescriptionDTOS: DescriptionDTO[] = [];
   dataSource: MatTableDataSource<DescriptionDTO>;
-  displayedColumns: string[] = [ 'id', 'fishName', 'fishWeight', 'typeId', 'tokenId', 'price','action'];
-  fakeList: string[] = ['id', 'fishName', 'fishWeight', 'typeId', 'tokenId', 'price'];
+  displayedColumns: string[] = [ 'id', 'fishName', 'fishWeight', 'coolingRoomId', 'tokenId', 'price','action'];
+  fakeList: string[] = ['id', 'fishName', 'fishWeight', 'coolingRoomId', 'tokenId', 'price'];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -225,7 +225,7 @@ export class CreateStockFormComponent implements OnInit {
         Number(this.selectedDescriptionDTOS.length),
         this.stockDescDetailsForm.get('fishName')?.value,
         this.stockDescDetailsForm.get('fishWeight')?.value,
-        <number>this.selectedCoolingRoomType?.id,
+        <number>this.selectedCoolingRoom?.id,
         0,
         this.totalCalc(Number(this.selectedCoolingRoomType?.typePrice),this.stockDescDetailsForm.get('fishWeight')?.value),
         1,
